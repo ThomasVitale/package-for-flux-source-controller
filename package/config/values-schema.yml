@@ -1,0 +1,23 @@
+#@data/values-schema
+---
+
+#@schema/desc "The namespace where to install FluxCD Source Controller"
+namespace: source-system
+
+#@schema/desc "Resource configuration for the source-controller Deployment"
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+#@schema/desc "Port configuration for the source-controller Service"
+service_port: 80
+
+#@schema/desc "Configure proxy support"
+proxy:
+  #@schema/desc "For which domains the proxy should not be used"
+  no_proxy: ""
+  #@schema/desc "The HTTPS proxy URL"
+  https_proxy: ""
+  #@schema/desc "The HTTP proxy URL"
+  http_proxy: ""

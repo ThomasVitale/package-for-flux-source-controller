@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'Merge pull request #895 from fluxcd/release-v0.29.0...'
+      sha: 9e853a909d878d0c9faec11cf2c8cc41cdc9a1c9
+      tags:
+      - v0.29.0
+    path: .
+  path: config/upstream
+kind: LockConfig

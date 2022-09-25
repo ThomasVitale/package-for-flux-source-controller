@@ -1,0 +1,107 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: fluxcd-source-controller.packages.kadras.io.0.0.0
+spec:
+  licenses:
+  - Apache 2.0
+  refName: fluxcd-source-controller.packages.kadras.io
+  releaseNotes: https://github.com/fluxcd/source-controller/releases
+  releasedAt: null
+  template:
+    spec:
+      deploy:
+      - kapp: {}
+      fetch:
+      - git: {}
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld: {}
+  valuesSchema:
+    openAPIv3:
+      additionalProperties: false
+      properties:
+        namespace:
+          default: source-system
+          description: The namespace where to install FluxCD Source Controller
+          type: string
+        proxy:
+          additionalProperties: false
+          description: Configure proxy support
+          properties:
+            http_proxy:
+              default: ""
+              description: The HTTP proxy URL
+              type: string
+            https_proxy:
+              default: ""
+              description: The HTTPS proxy URL
+              type: string
+            no_proxy:
+              default: ""
+              description: For which domains the proxy should not be used
+              type: string
+          type: object
+        resources:
+          additionalProperties: false
+          description: Resource configuration for the source-controller Deployment
+          properties:
+            limits:
+              additionalProperties: false
+              properties:
+                cpu:
+                  default: 1000m
+                  type: string
+                memory:
+                  default: 1Gi
+                  type: string
+              type: object
+          type: object
+        service_port:
+          default: 80
+          description: Port configuration for the source-controller Service
+          type: integer
+  version: 0.0.0
+
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  creationTimestamp: null
+  name: fluxcd-source-controller.packages.kadras.io
+spec:
+  categories:
+  - gitops
+  displayName: fluxcd-source-controller
+  longDescription: The FluxCD Source Controller is a Kubernetes operator, specialised
+    in artifacts acquisition from external sources such as Git, Helm repositories
+    and S3 buckets. It implements the source.toolkit.fluxcd.io API and is a core component
+    of the GitOps toolkit.
+  maintainers:
+  - name: Thomas Vitale
+  providerName: Arktonix
+  shortDescription: The FluxCD Source Controller is a Kubernetes operator, specialised
+    in artifacts acquisition from external sources such as Git, Helm repositories
+    and S3 buckets.
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    kctrl.carvel.dev/local-fetch-0: .
+  creationTimestamp: null
+  name: fluxcd-source-controller
+spec:
+  packageRef:
+    refName: fluxcd-source-controller.packages.kadras.io
+    versionSelection:
+      constraints: 0.0.0
+  serviceAccountName: kadras-install-sa
+status:
+  conditions: null
+  friendlyDescription: ""
+  observedGeneration: 0

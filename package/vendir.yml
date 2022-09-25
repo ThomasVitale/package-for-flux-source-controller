@@ -1,0 +1,17 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - excludePaths:
+    - config/samples/*
+    - config/testdata/**
+    - config/*/kustomization.yaml
+    - config/rbac/*_editor_role.yaml
+    - config/rbac/*_viewer_role.yaml
+    git:
+      ref: v0.29.0
+      url: https://github.com/fluxcd/source-controller
+    newRootPath: config
+    path: .
+  path: config/upstream
+kind: Config
+minimumRequiredVersion: ""
