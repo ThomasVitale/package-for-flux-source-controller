@@ -104,7 +104,7 @@ For documentation specific to FluxCD Source Controller, check out [https://fluxc
 
 ## References
 
-This package is a fork of the [FluxCD Source Controller](https://github.com/vmware-tanzu/package-for-source-controller) package used in Tanzu Community Edition, but not supported anymore.
+This package is based on the original [FluxCD Source Controller](https://github.com/vmware-tanzu/package-for-source-controller) package used in Tanzu Community Edition before its retirement.
 
 ## Supply Chain Security
 
