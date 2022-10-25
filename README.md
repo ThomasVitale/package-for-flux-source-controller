@@ -39,7 +39,7 @@ Either way, you can then install the FluxCD Source Controller package using [`kc
 ```shell
 kctrl package install -i fluxcd-source-controller \
     -p fluxcd-source-controller.packages.kadras.io \
-    -v 0.29.0 \
+    -v 0.31.0 \
     -n carvel-packages
 ```
 
@@ -93,7 +93,7 @@ Then, reference it from the `kctrl` command when installing or upgrading the pac
 ```shell
 kctrl package install -i fluxcd-source-controller \
     -p fluxcd-source-controller.packages.kadras.io \
-    -v 0.29.0 \
+    -v 0.31.0 \
     -n carvel-packages \
     --values-file values.yml
 ```
@@ -104,7 +104,7 @@ For documentation specific to FluxCD Source Controller, check out [https://fluxc
 
 ## References
 
-This package is based on the original [FluxCD Source Controller](https://github.com/vmware-tanzu/package-for-source-controller) package used in Tanzu Community Edition before its retirement.
+This package is based on the original FluxCD Source Controller package used in [Tanzu Community Edition](https://github.com/vmware-tanzu/community-edition) before its retirement.
 
 ## Supply Chain Security
 

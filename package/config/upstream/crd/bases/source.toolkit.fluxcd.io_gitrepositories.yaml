@@ -1,10 +1,9 @@
-
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.7.0
+    controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
   name: gitrepositories.source.toolkit.fluxcd.io
 spec:
@@ -236,14 +235,12 @@ spec:
                   description: "Condition contains details for one aspect of the current
                     state of this API Resource. --- This struct is intended for direct
                     use as an array at the field path .status.conditions.  For example,
-                    \n \ttype FooStatus struct{ \t    // Represents the observations
-                    of a foo's current state. \t    // Known .status.conditions.type
-                    are: \"Available\", \"Progressing\", and \"Degraded\" \t    //
-                    +patchMergeKey=type \t    // +patchStrategy=merge \t    // +listType=map
-                    \t    // +listMapKey=type \t    Conditions []metav1.Condition
+                    \n type FooStatus struct{ // Represents the observations of a
+                    foo's current state. // Known .status.conditions.type are: \"Available\",
+                    \"Progressing\", and \"Degraded\" // +patchMergeKey=type // +patchStrategy=merge
+                    // +listType=map // +listMapKey=type Conditions []metav1.Condition
                     `json:\"conditions,omitempty\" patchStrategy:\"merge\" patchMergeKey:\"type\"
-                    protobuf:\"bytes,1,rep,name=conditions\"` \n \t    // other fields
-                    \t}"
+                    protobuf:\"bytes,1,rep,name=conditions\"` \n // other fields }"
                   properties:
                     lastTransitionTime:
                       description: lastTransitionTime is the last time the condition
@@ -459,6 +456,7 @@ spec:
                 type: array
               interval:
                 description: Interval at which to check the GitRepository for updates.
+                pattern: ^([0-9]+(\.[0-9]+)?(ms|s|m|h))+$
                 type: string
               recurseSubmodules:
                 description: RecurseSubmodules enables the initialization of all submodules
@@ -510,6 +508,7 @@ spec:
                 default: 60s
                 description: Timeout for Git operations like cloning, defaults to
                   60s.
+                pattern: ^([0-9]+(\.[0-9]+)?(ms|s|m))+$
                 type: string
               url:
                 description: URL specifies the Git repository URL, it can be an HTTP/S
@@ -595,14 +594,12 @@ spec:
                   description: "Condition contains details for one aspect of the current
                     state of this API Resource. --- This struct is intended for direct
                     use as an array at the field path .status.conditions.  For example,
-                    \n \ttype FooStatus struct{ \t    // Represents the observations
-                    of a foo's current state. \t    // Known .status.conditions.type
-                    are: \"Available\", \"Progressing\", and \"Degraded\" \t    //
-                    +patchMergeKey=type \t    // +patchStrategy=merge \t    // +listType=map
-                    \t    // +listMapKey=type \t    Conditions []metav1.Condition
+                    \n type FooStatus struct{ // Represents the observations of a
+                    foo's current state. // Known .status.conditions.type are: \"Available\",
+                    \"Progressing\", and \"Degraded\" // +patchMergeKey=type // +patchStrategy=merge
+                    // +listType=map // +listMapKey=type Conditions []metav1.Condition
                     `json:\"conditions,omitempty\" patchStrategy:\"merge\" patchMergeKey:\"type\"
-                    protobuf:\"bytes,1,rep,name=conditions\"` \n \t    // other fields
-                    \t}"
+                    protobuf:\"bytes,1,rep,name=conditions\"` \n // other fields }"
                   properties:
                     lastTransitionTime:
                       description: lastTransitionTime is the last time the condition
@@ -661,13 +658,14 @@ spec:
                   type: object
                 type: array
               contentConfigChecksum:
-                description: 'ContentConfigChecksum is a checksum of all the configurations
-                  related to the content of the source artifact:  - .spec.ignore  -
-                  .spec.recurseSubmodules  - .spec.included and the checksum of the
+                description: "ContentConfigChecksum is a checksum of all the configurations
+                  related to the content of the source artifact: - .spec.ignore -
+                  .spec.recurseSubmodules - .spec.included and the checksum of the
                   included artifacts observed in .status.observedGeneration version
                   of the object. This can be used to determine if the content of the
                   included repository has changed. It has the format of `<algo>:<checksum>`,
-                  for example: `sha256:<checksum>`.'
+                  for example: `sha256:<checksum>`. \n Deprecated: Replaced with explicit
+                  fields for observed artifact content config in the status."
                 type: string
               includedArtifacts:
                 description: IncludedArtifacts contains a list of the last successfully
@@ -726,6 +724,44 @@ spec:
                   the GitRepository object.
                 format: int64
                 type: integer
+              observedIgnore:
+                description: ObservedIgnore is the observed exclusion patterns used
+                  for constructing the source artifact.
+                type: string
+              observedInclude:
+                description: ObservedInclude is the observed list of GitRepository
+                  resources used to to produce the current Artifact.
+                items:
+                  description: GitRepositoryInclude specifies a local reference to
+                    a GitRepository which Artifact (sub-)contents must be included,
+                    and where they should be placed.
+                  properties:
+                    fromPath:
+                      description: FromPath specifies the path to copy contents from,
+                        defaults to the root of the Artifact.
+                      type: string
+                    repository:
+                      description: GitRepositoryRef specifies the GitRepository which
+                        Artifact contents must be included.
+                      properties:
+                        name:
+                          description: Name of the referent.
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    toPath:
+                      description: ToPath specifies the path to copy contents to,
+                        defaults to the name of the GitRepositoryRef.
+                      type: string
+                  required:
+                  - repository
+                  type: object
+                type: array
+              observedRecurseSubmodules:
+                description: ObservedRecurseSubmodules is the observed resource submodules
+                  configuration used to produce the current Artifact.
+                type: boolean
               url:
                 description: URL is the dynamic fetch link for the latest Artifact.
                   It is provided on a "best effort" basis, and using the precise GitRepositoryStatus.Artifact
