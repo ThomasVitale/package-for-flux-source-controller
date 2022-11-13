@@ -6,4 +6,4 @@ minimumRequiredVersion: ""
 
 overrides:
 - image: fluxcd/source-controller
-  newImage: fluxcd/source-controller:v0.29.0
+  newImage: fluxcd/source-controller:v0.31.0

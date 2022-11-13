@@ -18,14 +18,14 @@ metadata:
   name: fluxcd-source-sa-role
   namespace: #@ data.values.namespace
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - serviceaccounts
-  verbs:
-  - list
-  - get
-  - watch
+  - apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+    verbs:
+      - list
+      - get
+      - watch
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -45,13 +45,13 @@ subjects:
 #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "source-controller"}})
 ---
 metadata:
- #@overlay/match missing_ok=True
- namespace: #@ data.values.namespace
+  #@overlay/match missing_ok=True
+  namespace: #@ data.values.namespace
 spec:
- template:
-  spec:
-    #@overlay/match missing_ok=True
-    serviceAccountName: #@ svc_account_name
+  template:
+    spec:
+      #@overlay/match missing_ok=True
+      serviceAccountName: #@ svc_account_name
 
 #@overlay/match by=overlay.subset({"kind": "Namespace"})
 ---
@@ -113,5 +113,5 @@ subjects:
 #@overlay/match by=overlay.subset({"kind": "Service", "metadata": {"name": "source-controller"}})
 ---
 metadata:
- #@overlay/match missing_ok=True
- namespace: #@ data.values.namespace
+  #@overlay/match missing_ok=True
+  namespace: #@ data.values.namespace
