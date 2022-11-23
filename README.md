@@ -39,7 +39,7 @@ Either way, you can then install the FluxCD Source Controller package using [`kc
 ```shell
 kctrl package install -i fluxcd-source-controller \
     -p fluxcd-source-controller.packages.kadras.io \
-    -v 0.31.0+kadras.1 \
+    -v 0.32.1 \
     -n carvel-packages
 ```
 
@@ -93,7 +93,7 @@ Then, reference it from the `kctrl` command when installing or upgrading the pac
 ```shell
 kctrl package install -i fluxcd-source-controller \
     -p fluxcd-source-controller.packages.kadras.io \
-    -v 0.31.0+kadras.1 \
+    -v 0.32.1 \
     -n carvel-packages \
     --values-file values.yml
 ```
