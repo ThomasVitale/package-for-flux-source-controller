@@ -2,10 +2,10 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Merge pull request #962 from pjbgf/release-0.32.1...'
-      sha: b2eb601ba73d08c8fe6406fff95e9621da755bc7
+      commitTitle: 'Merge pull request #986 from pjbgf/release-v0.33.0...'
+      sha: 5ccf2fd6d3e8f4d98c680ee609354cf3632d9fbc
       tags:
-      - v0.32.1
+      - v0.33.0
     path: .
   path: config/upstream
 kind: LockConfig
