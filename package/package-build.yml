@@ -19,7 +19,7 @@ spec:
           - kbld: {}
       export:
       - imgpkgBundle:
-          image: ghcr.io/arktonix/package-for-fluxcd-source-controller
+          image: ghcr.io/kadras-io/package-for-fluxcd-source-controller
           useKbldImagesLock: true
         includePaths:
         - config
