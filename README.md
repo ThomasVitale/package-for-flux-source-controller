@@ -17,12 +17,12 @@ This project provides a [Carvel package](https://carvel.dev/kapp-controller/docs
 
 ## Installation
 
-First, add the [Kadras package repository](https://github.com/arktonix/kadras-packages) to your Kubernetes cluster.
+First, add the [Kadras package repository](https://github.com/kadras-io/kadras-packages) to your Kubernetes cluster.
 
   ```shell
   kubectl create namespace kadras-packages
   kctrl package repository add -r kadras-repo \
-    --url ghcr.io/arktonix/kadras-packages \
+    --url ghcr.io/kadras-io/kadras-packages \
     -n kadras-packages
   ```
 
@@ -31,7 +31,7 @@ Then, install the FluxCD Source Controller package.
   ```shell
   kctrl package install -i fluxcd-source-controller \
     -p fluxcd-source-controller.packages.kadras.io \
-    -v 0.33.0 \
+    -v 0.33.0+kadras.1 \
     -n kadras-packages
   ```
 
@@ -89,7 +89,7 @@ Then, reference it from the `kctrl` command when installing or upgrading the pac
   ```shell
   kctrl package install -i fluxcd-source-controller \
     -p fluxcd-source-controller.packages.kadras.io \
-    -v 0.33.0 \
+    -v 0.33.0+kadras.1 \
     -n kadras-packages \
     --values-file values.yml
   ```
@@ -114,13 +114,13 @@ You can also update an existing package with a newer `values.yml` file.
 
 ## Other
 
-The recommended way of installing the FluxCD Source Controller package is via the [Kadras package repository](https://github.com/arktonix/kadras-packages). If you prefer not using the repository, you can install the package by creating the necessary Carvel `PackageMetadata` and `Package` resources directly using [`kapp`](https://carvel.dev/kapp/docs/latest/install) or `kubectl`.
+The recommended way of installing the FluxCD Source Controller package is via the [Kadras package repository](https://github.com/kadras-io/kadras-packages). If you prefer not using the repository, you can install the package by creating the necessary Carvel `PackageMetadata` and `Package` resources directly using [`kapp`](https://carvel.dev/kapp/docs/latest/install) or `kubectl`.
 
   ```shell
   kubectl create namespace kadras-packages
   kapp deploy -a fluxcd-source-controller-package -n kadras-packages -y \
-    -f https://github.com/arktonix/package-for-fluxcd-source-controller/releases/latest/download/metadata.yml \
-    -f https://github.com/arktonix/package-for-fluxcd-source-controller/releases/latest/download/package.yml
+    -f https://github.com/kadras-io/package-for-fluxcd-source-controller/releases/latest/download/metadata.yml \
+    -f https://github.com/kadras-io/package-for-fluxcd-source-controller/releases/latest/download/package.yml
   ```
 
 ## Support and Documentation
