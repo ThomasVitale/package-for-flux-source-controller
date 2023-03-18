@@ -1,18 +1,18 @@
 #@data/values-schema
 ---
 
-#@schema/desc "The namespace where to install FluxCD Source Controller"
+#@schema/desc "The namespace where to install FluxCD Source Controller."
 namespace: source-system
 
 #@schema/desc "Resource configuration for the source-controller Deployment."
 resources:
   limits:
-    #@schema/desc "CPU limits configuration for the source-controller Deployment."
+    #@schema/desc "CPU limits configuration for the `source-controller` Deployment."
     cpu: 1000m
-    #@schema/desc "Memory limits configuration for the source-controller Deployment."
+    #@schema/desc "Memory limits configuration for the `source-controller` Deployment."
     memory: 1Gi
 
-#@schema/desc "Port configuration for the source-controller Service."
+#@schema/desc "Port configuration for the `source-controller` Service."
 service_port: 80
 
 #@schema/desc "Settings for the corporate proxy."
