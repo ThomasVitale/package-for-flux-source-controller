@@ -100,6 +100,7 @@ The kpack package has the following configurable properties.
 | Config | Default | Description |
 |-------|-------------------|-------------|
 | `namespace` | `flux-source-system` | The namespace where to install FluxCD Source Controller. |
+| `policies.include` | `false` | Whether to include the out-of-the-box Kyverno policies to validate and secure the package installation. |
 | `resources.limits.cpu` | `1000m` | CPU limits configuration for the `source-controller` Deployment. |
 | `resources.limits.memory` | `1Gi` | Memory limits configuration for the `source-controller` Deployment. |
 | `service_port` | `80` | Port configuration for the `source-controller` Service. |
