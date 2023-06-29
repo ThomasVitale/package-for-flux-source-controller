@@ -2,7 +2,7 @@
 
 ![Test Workflow](https://github.com/kadras-io/package-for-kpack/actions/workflows/test.yml/badge.svg)
 ![Release Workflow](https://github.com/kadras-io/package-for-kpack/actions/workflows/release.yml/badge.svg)
-[![The SLSA Level 3 badge](https://slsa.dev/images/gh-badge-level3.svg)](https://slsa.dev/spec/v0.1/levels)
+[![The SLSA Level 3 badge](https://slsa.dev/images/gh-badge-level3.svg)](https://slsa.dev/spec/v1.0/levels)
 [![The Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Follow us on Twitter](https://img.shields.io/static/v1?label=Twitter&message=Follow&color=1DA1F2)](https://twitter.com/kadrasIO)
 
@@ -12,7 +12,7 @@ A Carvel package for [FluxCD Source Controller](https://fluxcd.io/docs/component
 
 ### Prerequisites
 
-* Kubernetes 1.24+
+* Kubernetes 1.25+
 * Carvel [`kctrl`](https://carvel.dev/kapp-controller/docs/latest/install/#installing-kapp-controller-cli-kctrl) CLI.
 * Carvel [kapp-controller](https://carvel.dev/kapp-controller) deployed in your Kubernetes cluster. You can install it with Carvel [`kapp`](https://carvel.dev/kapp/docs/latest/install) (recommended choice) or `kubectl`.
 
@@ -26,10 +26,9 @@ A Carvel package for [FluxCD Source Controller](https://fluxcd.io/docs/component
 Add the Kadras [package repository](https://github.com/kadras-io/kadras-packages) to your Kubernetes cluster:
 
   ```shell
-  kubectl create namespace kadras-packages
   kctrl package repository add -r kadras-packages \
     --url ghcr.io/kadras-io/kadras-packages \
-    -n kadras-packages
+    -n kadras-packages --create-namespace
   ```
 
 <details><summary>Installation without package repository</summary>
@@ -64,6 +63,7 @@ Verify the installed packages and their status:
   ```shell
   kctrl package installed list -n kadras-packages
   ```
+
 ## 📙&nbsp; Documentation
 
 Documentation, tutorials and examples for this package are available in the [docs](docs) folder.
@@ -99,13 +99,13 @@ The kpack package has the following configurable properties.
 
 | Config | Default | Description |
 |-------|-------------------|-------------|
-| `namespace` | `source-system` | The namespace where to install FluxCD Source Controller. |
+| `namespace` | `flux-source-system` | The namespace where to install FluxCD Source Controller. |
 | `resources.limits.cpu` | `1000m` | CPU limits configuration for the `source-controller` Deployment. |
 | `resources.limits.memory` | `1Gi` | Memory limits configuration for the `source-controller` Deployment. |
 | `service_port` | `80` | Port configuration for the `source-controller` Service. |
 | `proxy.http_proxy` | `""` | The HTTP proxy to use for network traffic. |
 | `proxy.https_proxy` | `""` | The HTTPS proxy to use for network traffic. |
-| `proxy.no_proxy` | `""` | A comma-separated list of hostnames, IP addresses, or IP ranges in CIDR format that should not use a proxy. |
+| `proxy.no_proxy` | `""` | A comma-separated list of hostnames, IP addresses, or IP ranges in CIDR format that should not use the proxy. |
 
 </details>
 
@@ -119,4 +119,4 @@ This project is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE
 
 ## 🙏&nbsp; Acknowledgments
 
-This package is inspired by the original kpack package used in the [Tanzu Community Edition](https://github.com/vmware-tanzu/community-edition) project before its retirement.
+This package is inspired by the original source-controller package used in the [Tanzu Community Edition](https://github.com/vmware-tanzu/community-edition) project before its retirement.

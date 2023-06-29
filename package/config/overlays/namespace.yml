@@ -1,57 +1,5 @@
 #@ load("@ytt:data", "data")
 #@ load("@ytt:overlay", "overlay")
-#@ load("@ytt:template", "template")
-
-#@ svc_account_name = "fluxcd-source-sa"
-
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: #@ svc_account_name
-  namespace: #@ data.values.namespace
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: fluxcd-source-sa-role
-  namespace: #@ data.values.namespace
-rules:
-  - apiGroups:
-      - ""
-    resources:
-      - serviceaccounts
-    verbs:
-      - list
-      - get
-      - watch
-
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: fluxcd-source-sa-rolebinding
-  namespace: #@ data.values.namespace
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: fluxcd-source-sa-role
-subjects:
-- kind: ServiceAccount
-  name: #@ svc_account_name
-  namespace: #@ data.values.namespace
-
-#@overlay/match by=overlay.subset({"kind":"Deployment", "metadata":{"name":"source-controller"}})
----
-metadata:
-  #@overlay/match missing_ok=True
-  namespace: #@ data.values.namespace
-spec:
-  template:
-    spec:
-      #@overlay/match missing_ok=True
-      serviceAccountName: #@ svc_account_name
 
 #@overlay/match by=overlay.subset({"kind":"Namespace"})
 ---
@@ -60,13 +8,17 @@ kind: Namespace
 metadata:
   name: #@ data.values.namespace
 
-#@overlay/match by=overlay.subset({"kind":"Service"})
+#@overlay/match by=overlay.subset({"kind":"Service", "metadata":{"name":"source-controller"}})
 ---
-spec:
-  ports:
-    #@overlay/match by=overlay.subset({"name":"http"})
-    - name: http
-      port: #@ data.values.service_port
+metadata:
+  #@overlay/match missing_ok=True
+  namespace: #@ data.values.namespace
+
+#@overlay/match by=overlay.subset({"kind":"Deployment", "metadata":{"name":"source-controller"}})
+---
+metadata:
+  #@overlay/match missing_ok=True
+  namespace: #@ data.values.namespace
 
 #@overlay/match by=overlay.subset({"kind":"Role", "metadata":{"name":"leader-election-role"}})
 ---
@@ -88,7 +40,7 @@ roleRef:
 subjects:
   #@overlay/match by=overlay.subset({"kind": "ServiceAccount"})
   - kind: ServiceAccount
-    name: #@ svc_account_name
+    name: default
     namespace: #@ data.values.namespace
 
 #@overlay/match by=overlay.subset({"kind":"ClusterRole", "metadata":{"name":"manager-role"}})
@@ -107,11 +59,5 @@ roleRef:
 subjects:
   #@overlay/match by=overlay.subset({"kind":"ServiceAccount"})
   - kind: ServiceAccount
-    name: #@ svc_account_name
+    name: default
     namespace: #@ data.values.namespace
-
-#@overlay/match by=overlay.subset({"kind":"Service", "metadata":{"name":"source-controller"}})
----
-metadata:
-  #@overlay/match missing_ok=True
-  namespace: #@ data.values.namespace

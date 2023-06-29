@@ -1,0 +1,10 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Service"})
+---
+spec:
+  ports:
+    #@overlay/match by=overlay.subset({"name":"http"})
+    - name: http
+      port: #@ data.values.service_port
