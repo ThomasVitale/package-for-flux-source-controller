@@ -1,9 +1,0 @@
----
-apiVersion: kbld.k14s.io/v1alpha1
-kind: Config
-
-minimumRequiredVersion: 0.37.0
-
-overrides:
-- image: fluxcd/source-controller
-  newImage: ghcr.io/fluxcd/source-controller:v0.36.1

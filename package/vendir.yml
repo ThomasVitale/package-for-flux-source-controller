@@ -1,17 +1,25 @@
 apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
-  - excludePaths:
-    - config/samples/*
-    - config/testdata/**
-    - config/*/kustomization.yaml
-    - config/rbac/*_editor_role.yaml
-    - config/rbac/*_viewer_role.yaml
-    git:
-      ref: v0.36.1
+  - git:
+      ref: v1.0.0
       url: https://github.com/fluxcd/source-controller
+    includePaths:
+    - config/default/namespace.yaml
+    - config/rbac/leader_election_role.yaml
+    - config/rbac/leader_election_role_binding.yaml
+    - config/rbac/role.yaml
+    - config/rbac/role_binding.yaml
     newRootPath: config
-    path: .
+    path: context
+  - githubRelease:
+      disableAutoChecksumValidation: true
+      slug: fluxcd/source-controller
+      tag: v1.0.0
+    includePaths:
+    - source-controller.crds.yaml
+    - source-controller.deployment.yaml
+    path: release
   path: config/upstream
 kind: Config
 minimumRequiredVersion: ""
