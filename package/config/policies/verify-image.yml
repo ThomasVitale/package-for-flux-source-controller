@@ -29,6 +29,7 @@ spec:
       verifyImages:
       - imageReferences:
         - "ghcr.io/fluxcd/*"
+        - "docker.io/fluxcd/*"
         attestors:
         - entries:
           - keyless:
