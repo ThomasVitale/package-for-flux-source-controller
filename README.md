@@ -107,6 +107,12 @@ The kpack package has the following configurable properties.
 | `proxy.http_proxy` | `""` | The HTTP proxy to use for network traffic. |
 | `proxy.https_proxy` | `""` | The HTTPS proxy to use for network traffic. |
 | `proxy.no_proxy` | `""` | A comma-separated list of hostnames, IP addresses, or IP ranges in CIDR format that should not use the proxy. |
+| `logging.level` | `info` | Log verbosity level. Options: `trace`, `debug`, `info`, `error`. |
+| `logging.encoding` | `json` | Log encoding format. Options: `console`, `json`. |
+| `leader_election.lease_duration` | `35s` | Interval at which non-leader candidates will wait to force acquire leadership. |
+| `leader_election.release_on_cancel` | `true` | Defines if the leader should step down voluntarily on controller manager shutdown. |
+| `leader_election.renew_deadline` | `30s` | Duration that the leading controller manager will retry refreshing leadership before giving up. |
+| `leader_election.retry_period` | `5s` | Duration the LeaderElector clients should wait between tries of actions. |
 
 </details>
 
