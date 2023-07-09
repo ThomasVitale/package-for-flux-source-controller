@@ -10,6 +10,15 @@ spec:
       containers:
         #@overlay/match by="name"
         - name: manager
+          args:
+          #@overlay/match by=overlay.subset("--log-level=info")
+          - #@ "--log-level={}".format(data.values.logging.level)
+          #@overlay/match by=overlay.subset("--log-encoding=json")
+          - #@ "--log-encoding={}".format(data.values.logging.encoding)
+          - #@ "--leader-election-lease-duration={}".format(data.values.leader_election.lease_duration)
+          - #@ "--leader-election-release-on-cancel={}".format(data.values.leader_election.release_on_cancel)
+          - #@ "--leader-election-renew-deadline={}".format(data.values.leader_election.renew_deadline)
+          - #@ "--leader-election-retry-period={}".format(data.values.leader_election.retry_period)
           env:
           #@ if/end data.values.proxy.http_proxy != "":
           - name: HTTP_PROXY
