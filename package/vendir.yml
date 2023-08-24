@@ -2,7 +2,7 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      ref: v1.0.1
+      ref: v1.1.0
       url: https://github.com/fluxcd/source-controller
     includePaths:
     - config/default/namespace.yaml
@@ -15,7 +15,7 @@ directories:
   - githubRelease:
       disableAutoChecksumValidation: true
       slug: fluxcd/source-controller
-      tag: v1.0.1
+      tag: v1.1.0
     includePaths:
     - source-controller.crds.yaml
     - source-controller.deployment.yaml
