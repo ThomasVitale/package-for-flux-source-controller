@@ -4,7 +4,7 @@ kind: GitRepository
 metadata:
   name: podinfo
 spec:
-  interval: 5m0s
+  interval: 1m
   url: https://github.com/stefanprodan/podinfo
   ref:
     branch: master

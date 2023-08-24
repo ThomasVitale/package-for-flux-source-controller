@@ -1,8 +1,11 @@
+# Controller
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kyverno-admission-controller
-  namespace: kyverno
+  name: source-controller
+  namespace: flux-source-system
+spec:
+  replicas: 1
 status:
   readyReplicas: 1

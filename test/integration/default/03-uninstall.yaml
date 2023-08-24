@@ -1,6 +1,13 @@
 ---
 apiVersion: kuttl.dev/v1beta1
 kind: TestStep
+delete:
+  - apiVersion: source.toolkit.fluxcd.io/v1
+    kind: GitRepository
+    name: podinfo
+  - apiVersion: source.toolkit.fluxcd.io/v1beta2
+    kind: OCIRepository
+    name: podinfo
 commands:
   - script: |
       cd ../../../package && \
