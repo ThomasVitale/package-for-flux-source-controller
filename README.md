@@ -6,6 +6,9 @@
 [![The Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Follow us on Twitter](https://img.shields.io/static/v1?label=Twitter&message=Follow&color=1DA1F2)](https://twitter.com/kadrasIO)
 
+> **Warning**
+> This package has been replaced by [kadras-io/package-for-flux](https://github.com/kadras-io/package-for-flux).
+
 A Carvel package for [Flux Source Controller](https://fluxcd.io/docs/components/source), a source management component to provide a common interface for artifacts acquisition.
 
 ## 🚀&nbsp; Getting Started
