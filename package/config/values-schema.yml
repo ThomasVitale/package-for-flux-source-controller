@@ -2,7 +2,7 @@
 ---
 
 #@schema/desc "The namespace where to install FluxCD Source Controller."
-namespace: flux-source-system
+namespace: flux-system
 
 #@schema/desc "Settings for the Kyverno policies."
 policies:
