@@ -1,9 +1,9 @@
 #@ load("@ytt:overlay", "overlay")
 
-#@overlay/match by=overlay.subset({"metadata":{"name":"fluxcd-source-controller"}, "kind":"PackageInstall"})
+#@overlay/match by=overlay.subset({"metadata":{"name":"flux-source-controller"}, "kind":"PackageInstall"})
 ---
 spec:
   #@overlay/match missing_ok=True
   values:
     - secretRef:
-        name: fluxcd-source-controller-values
+        name: flux-source-controller-values

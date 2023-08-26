@@ -5,7 +5,7 @@
 apiVersion: kyverno.io/v1
 kind: Policy
 metadata:
-  name: fluxcd-source-controller-verify-image
+  name: source-controller-verify-image
   namespace: #@ data.values.namespace
   annotations:
     policies.kyverno.io/title: Verify Image

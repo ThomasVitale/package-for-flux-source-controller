@@ -1,4 +1,4 @@
-# FluxCD Source Controller
+# Flux Source Controller
 
 ![Test Workflow](https://github.com/kadras-io/package-for-kpack/actions/workflows/test.yml/badge.svg)
 ![Release Workflow](https://github.com/kadras-io/package-for-kpack/actions/workflows/release.yml/badge.svg)
@@ -6,7 +6,7 @@
 [![The Apache 2.0 license badge](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Follow us on Twitter](https://img.shields.io/static/v1?label=Twitter&message=Follow&color=1DA1F2)](https://twitter.com/kadrasIO)
 
-A Carvel package for [FluxCD Source Controller](https://fluxcd.io/docs/components/source), a source management component to provide a common interface for artifacts acquisition.
+A Carvel package for [Flux Source Controller](https://fluxcd.io/docs/components/source), a source management component to provide a common interface for artifacts acquisition.
 
 ## 🚀&nbsp; Getting Started
 
@@ -32,21 +32,21 @@ Add the Kadras [package repository](https://github.com/kadras-io/kadras-packages
   ```
 
 <details><summary>Installation without package repository</summary>
-The recommended way of installing the FluxCD Source Controller package is via the Kadras <a href="https://github.com/kadras-io/kadras-packages">package repository</a>. If you prefer not using the repository, you can add the package definition directly using <a href="https://carvel.dev/kapp/docs/latest/install"><code>kapp</code></a> or <code>kubectl</code>.
+The recommended way of installing the Flux Source Controller package is via the Kadras <a href="https://github.com/kadras-io/kadras-packages">package repository</a>. If you prefer not using the repository, you can add the package definition directly using <a href="https://carvel.dev/kapp/docs/latest/install"><code>kapp</code></a> or <code>kubectl</code>.
 
   ```shell
   kubectl create namespace kadras-packages
-  kapp deploy -a fluxcd-source-controller-package -n kadras-packages -y \
-    -f https://github.com/kadras-io/package-for-fluxcd-source-controller/releases/latest/download/metadata.yml \
-    -f https://github.com/kadras-io/package-for-fluxcd-source-controller/releases/latest/download/package.yml
+  kapp deploy -a flux-source-controller-package -n kadras-packages -y \
+    -f https://github.com/kadras-io/package-for-flux-source-controller/releases/latest/download/metadata.yml \
+    -f https://github.com/kadras-io/package-for-flux-source-controller/releases/latest/download/package.yml
   ```
 </details>
 
-Install the FluxCD Source Controller package:
+Install the Flux Source Controller package:
 
   ```shell
-  kctrl package install -i fluxcd-source-controller \
-    -p fluxcd-source-controller.packages.kadras.io \
+  kctrl package install -i flux-source-controller \
+    -p flux-source-controller.packages.kadras.io \
     -v ${VERSION} \
     -n kadras-packages
   ```
@@ -55,7 +55,7 @@ Install the FluxCD Source Controller package:
 > You can find the `${VERSION}` value by retrieving the list of package versions available in the Kadras package repository installed on your cluster.
 > 
 >   ```shell
->   kctrl package available list -p fluxcd-source-controller.packages.kadras.io -n kadras-packages
+>   kctrl package available list -p flux-source-controller.packages.kadras.io -n kadras-packages
 >   ```
 
 Verify the installed packages and their status:
@@ -67,11 +67,11 @@ Verify the installed packages and their status:
 ## 📙&nbsp; Documentation
 
 Documentation, tutorials and examples for this package are available in the [docs](docs) folder.
-For documentation specific to FluxCD Source Controller, check out [fluxcd.io/docs/components/source](https://fluxcd.io/docs/components/source).
+For documentation specific to Flux Source Controller, check out [fluxcd.io/docs/components/source](https://fluxcd.io/docs/components/source).
 
 ## 🎯&nbsp; Configuration
 
-The FluxCD Source Controller package can be customized via a `values.yml` file.
+The Flux Source Controller package can be customized via a `values.yml` file.
 
   ```yaml
   resources:
@@ -84,8 +84,8 @@ The FluxCD Source Controller package can be customized via a `values.yml` file.
 Reference the `values.yml` file from the `kctrl` command when installing or upgrading the package.
 
   ```shell
-  kctrl package install -i fluxcd-source-controller \
-    -p fluxcd-source-controller.packages.kadras.io \
+  kctrl package install -i flux-source-controller \
+    -p flux-source-controller.packages.kadras.io \
     -v ${VERSION} \
     -n kadras-packages \
     --values-file values.yml
@@ -99,7 +99,7 @@ The kpack package has the following configurable properties.
 
 | Config | Default | Description |
 |-------|-------------------|-------------|
-| `namespace` | `flux-system` | The namespace where to install FluxCD Source Controller. |
+| `namespace` | `flux-system` | The namespace where to install Flux Source Controller. |
 | `policies.include` | `false` | Whether to include the out-of-the-box Kyverno policies to validate and secure the package installation. |
 | `resources.limits.cpu` | `1000m` | CPU limits configuration for the `source-controller` Deployment. |
 | `resources.limits.memory` | `1Gi` | Memory limits configuration for the `source-controller` Deployment. |

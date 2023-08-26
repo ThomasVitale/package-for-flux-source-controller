@@ -13,8 +13,8 @@ jobs:
       packages: write
     uses: kadras-io/github-reusable-workflows/.github/workflows/package-release.yml@main
     with:
-      package-name-slug: fluxcd-source-controller
-      package-name-display: FluxCD Source Controller
+      package-name-slug: flux-source-controller
+      package-name-display: Flux Source Controller
       registry-server: ghcr.io
       registry-username: ${{ github.actor }}
       image: ${{ github.repository }}
