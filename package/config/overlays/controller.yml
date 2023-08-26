@@ -7,6 +7,8 @@ spec:
   template:
     spec:
       #@overlay/match missing_ok=True
+      serviceAccountName: source-controller
+      #@overlay/match missing_ok=True
       containers:
         #@overlay/match by="name"
         - name: manager
@@ -29,6 +31,9 @@ spec:
           #@ if/end data.values.proxy.no_proxy != "":
           - name: NO_PROXY
             value: #@ data.values.proxy.no_proxy
+          #! Pull image from GitHub Container Registry rather than Docker Hub.
+          #@overlay/replace via=lambda left, _: "ghcr.io/" + left
+          image:
           #@overlay/match missing_ok=True
           resources:
             limits:
