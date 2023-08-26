@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: fluxcd-source-controller-values
+  name: flux-source-controller-values
   namespace: tests
 stringData:
   values.yaml: |
